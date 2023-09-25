@@ -13,11 +13,11 @@
 		758DA1492AC1C863006939D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1482AC1C863006939D3 /* Assets.xcassets */; };
 		758DA14C2AC1C863006939D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 758DA14A2AC1C863006939D3 /* LaunchScreen.storyboard */; };
 		758DA1542AC1CAF9006939D3 /* TracklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */; };
-		758DA15B2AC1D9CF006939D3 /* boli 140.wav in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1562AC1D9CF006939D3 /* boli 140.wav */; };
-		758DA15C2AC1D9CF006939D3 /* obninsk_76_Dmaj.wav in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1572AC1D9CF006939D3 /* obninsk_76_Dmaj.wav */; };
-		758DA15D2AC1D9CF006939D3 /* inoplanet 100.wav in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1582AC1D9CF006939D3 /* inoplanet 100.wav */; };
-		758DA15E2AC1D9CF006939D3 /* shantaram 131.wav in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1592AC1D9CF006939D3 /* shantaram 131.wav */; };
-		758DA15F2AC1D9CF006939D3 /* dom perenyon 120.wav in Resources */ = {isa = PBXBuildFile; fileRef = 758DA15A2AC1D9CF006939D3 /* dom perenyon 120.wav */; };
+		758DA1662AC1EF07006939D3 /* Blasta - Из бара.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */; };
+		758DA1672AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */; };
+		758DA1682AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */; };
+		758DA1692AC1EF07006939D3 /* Sampha - Only.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */; };
+		758DA16A2AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +29,11 @@
 		758DA14B2AC1C863006939D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		758DA14D2AC1C863006939D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracklistViewController.swift; sourceTree = "<group>"; };
-		758DA1562AC1D9CF006939D3 /* boli 140.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "boli 140.wav"; sourceTree = "<group>"; };
-		758DA1572AC1D9CF006939D3 /* obninsk_76_Dmaj.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = obninsk_76_Dmaj.wav; sourceTree = "<group>"; };
-		758DA1582AC1D9CF006939D3 /* inoplanet 100.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "inoplanet 100.wav"; sourceTree = "<group>"; };
-		758DA1592AC1D9CF006939D3 /* shantaram 131.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "shantaram 131.wav"; sourceTree = "<group>"; };
-		758DA15A2AC1D9CF006939D3 /* dom perenyon 120.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "dom perenyon 120.wav"; sourceTree = "<group>"; };
+		758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blasta - Из бара.mp3"; sourceTree = "<group>"; };
+		758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Komplimenter - В твоей голове.mp3"; sourceTree = "<group>"; };
+		758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Seathasky, Collette Warren - Cant Right Now.mp3"; sourceTree = "<group>"; };
+		758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sampha - Only.mp3"; sourceTree = "<group>"; };
+		758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "вика кравцова - Твой Юг.mp3"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +66,7 @@
 		758DA13E2AC1C862006939D3 /* MyMusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				758DA1552AC1D9CF006939D3 /* library */,
+				758DA1602AC1EF07006939D3 /* library */,
 				758DA13F2AC1C862006939D3 /* AppDelegate.swift */,
 				758DA1412AC1C862006939D3 /* SceneDelegate.swift */,
 				758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */,
@@ -78,14 +78,14 @@
 			path = MyMusicPlayer;
 			sourceTree = "<group>";
 		};
-		758DA1552AC1D9CF006939D3 /* library */ = {
+		758DA1602AC1EF07006939D3 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				758DA1562AC1D9CF006939D3 /* boli 140.wav */,
-				758DA1572AC1D9CF006939D3 /* obninsk_76_Dmaj.wav */,
-				758DA1582AC1D9CF006939D3 /* inoplanet 100.wav */,
-				758DA1592AC1D9CF006939D3 /* shantaram 131.wav */,
-				758DA15A2AC1D9CF006939D3 /* dom perenyon 120.wav */,
+				758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */,
+				758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */,
+				758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */,
+				758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */,
+				758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */,
 			);
 			path = library;
 			sourceTree = "<group>";
@@ -148,13 +148,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758DA1672AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */,
+				758DA1662AC1EF07006939D3 /* Blasta - Из бара.mp3 in Resources */,
+				758DA1692AC1EF07006939D3 /* Sampha - Only.mp3 in Resources */,
+				758DA1682AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */,
 				758DA14C2AC1C863006939D3 /* LaunchScreen.storyboard in Resources */,
-				758DA15E2AC1D9CF006939D3 /* shantaram 131.wav in Resources */,
-				758DA15D2AC1D9CF006939D3 /* inoplanet 100.wav in Resources */,
+				758DA16A2AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */,
 				758DA1492AC1C863006939D3 /* Assets.xcassets in Resources */,
-				758DA15F2AC1D9CF006939D3 /* dom perenyon 120.wav in Resources */,
-				758DA15C2AC1D9CF006939D3 /* obninsk_76_Dmaj.wav in Resources */,
-				758DA15B2AC1D9CF006939D3 /* boli 140.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
