@@ -13,8 +13,12 @@ private enum State {
     case opening
 }
 
+protocol PlayerSmallViewDelegate: AnyObject {
+    func playPauseButtonDidTapped(with state: PlayPauseButton.ButtonState)
+    func goToPlayer()
+}
+
 class PlayerSmallView: UIView {
-    
     
     // MARK: - User Interface
     
@@ -37,29 +41,22 @@ class PlayerSmallView: UIView {
        return label
     }()
     
-
-
-    
-    var playAndStopButton: UIButton = {
-        var button = UIButton(type: .system)
-        button.tintColor = .white
-        
-        var pauseImage = UIImage(systemName: "pause.fill")
-        
-        button.setImage(pauseImage, for: .normal)
-        button.addTarget(self, action: #selector(playPauseTapped), for: .touchUpInside)
-        
+    var playAndStopButton: PlayPauseButton = {
+        var button = PlayPauseButton()
         return button
     }()
     
     // MARK: - Properties
     
-  
+    weak var delegate: PlayerSmallViewDelegate?
+    
     var playImage = UIImage(systemName: "play.fill")
     var pauseImage = UIImage(systemName: "pause.fill")
     
     var isPlaying = false
     private var topConstant = NSLayoutConstraint()
+    
+    private var currentState: State = .normal
 
     
     override init(frame: CGRect) {
@@ -68,7 +65,10 @@ class PlayerSmallView: UIView {
         backgroundColor = .lightGray
         translatesAutoresizingMaskIntoConstraints = false
         setupUI()
+        configureButton()
         
+        setupGuestRecognizer()
+
         self.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
     }
     
@@ -76,16 +76,15 @@ class PlayerSmallView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func playPauseTapped() {
-        isPlaying.toggle()
-        
-        if isPlaying {
-            playAndStopButton.setImage(pauseImage, for: .normal)
-        } else {
-            playAndStopButton.setImage(playImage, for: .normal)
-        }
+    private func configureButton() {
+        playAndStopButton.addTarget(self, action: #selector(playAndStopButtonTapped), for: .touchUpInside)
     }
-        
+    
+    @objc
+    private func playAndStopButtonTapped() {
+        delegate?.playPauseButtonDidTapped(with: playAndStopButton.buttonState)
+    }
+
     override func didMoveToSuperview() {
         if let superview = superview {
             NSLayoutConstraint.activate([
@@ -132,13 +131,31 @@ class PlayerSmallView: UIView {
                 playAndStopButton.widthAnchor.constraint(equalToConstant: 30),
                 playAndStopButton.heightAnchor.constraint(equalTo: playAndStopButton.widthAnchor)
              ])
-        
-
         }
     }
 
 
+
 extension PlayerSmallView {
+    func setupGuestRecognizer() {
+        let gestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(startTransition(_:)))
+        gestureRecognizer.direction = .up
+        gestureRecognizer.numberOfTouchesRequired = 1
+        addGestureRecognizer(gestureRecognizer)
+        isUserInteractionEnabled = true
+    }
+    
+    @objc func startTransition(_ tap: UITapGestureRecognizer) {
+        if let superview = superview {
+            self.topAnchor.constraint(equalTo: superview.bottomAnchor, constant: -200).isActive = true
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut) {
+                self.superview?.layoutIfNeeded()
+            }
+        }
+        delegate?.goToPlayer()
+    }
+    
+  
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         if #available(iOS 11, *) {
@@ -164,6 +181,5 @@ extension PlayerSmallView {
             self.layer.mask = mask
         }
     }
-    
 }
 

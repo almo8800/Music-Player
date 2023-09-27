@@ -18,6 +18,14 @@ class TracklistViewController: UIViewController {
     var tracksService = TracksService()
     var myPlayer: MyPlayer!
     
+    private var playingTrackIndex: Int? = nil {
+        didSet {
+            if let oldValue = oldValue {
+                handlePlayCellIndicator(index: oldValue, needToShow: false)
+            }
+        }
+    }
+    
     var isFirstTap = false
     
     lazy var playerSmallView: PlayerSmallView = {
@@ -30,7 +38,7 @@ class TracklistViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .cyan
         
-        myPlayer = MyPlayer(service: tracksService)
+      
         
         configureUI()
     
@@ -38,11 +46,28 @@ class TracklistViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(TrackCell.self, forCellWithReuseIdentifier: "TracklistCell")
         
+        tracksService.configureSongs { tracks in
+            self.collectionView.reloadData()
+        }
+        
+        myPlayer = MyPlayer(service: tracksService)
+        
+        playerSmallView.delegate = self
+        
         myPlayer.$currentTime
         .map { value in return Float(value) }
             .sink { newValue in
-                print(newValue)
                 self.playerSmallView.progressView.setProgress(newValue, animated: false)
+            }
+            .store(in: &cancallables)
+        
+        myPlayer.$currentTrackIndex
+            .sink { trackIndex in
+                self.playingTrackIndex = trackIndex
+                print("должна быть \(trackIndex) ячейка нв вью контроллере")
+                self.playerSmallViewConfigure(trackIndex: trackIndex)
+                self.handlePlayCellIndicator(index: trackIndex, needToShow: false)
+                self.handlePlayCellIndicator(index: trackIndex, needToShow: true)
             }
             .store(in: &cancallables)
     }
@@ -76,11 +101,11 @@ class TracklistViewController: UIViewController {
 
 extension TracklistViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return tracksService.tracks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -95,29 +120,34 @@ extension TracklistViewController: UICollectionViewDelegate, UICollectionViewDat
        
       
         myPlayer.configureAudioPlayer(trackIndex: indexPath.row)
+        myPlayer.avAudioPlayer.delegate = self
         
-        if let selectedCell = collectionView.cellForItem(at: indexPath) as? TrackCell {
-            selectedCell.showPlayAnimation()
-            playerSmallView.nameLabel.text = tracksService.tracks[indexPath.row].name
-            
-        }
+        playerSmallView.playAndStopButton.buttonState = .play
+        
+        playerSmallViewConfigure(trackIndex: indexPath.row)
+        
+        handlePlayCellIndicator(index: indexPath.row, needToShow: true)
+        
         
         guard isFirstTap else {
             isFirstTap = true
             activatePlayerSmallView()
             return
         }
-        
+    }
+    
+    private func playerSmallViewConfigure(trackIndex: Int) {
+        guard tracksService.tracks.count != 0 else { return }
+        playerSmallView.nameLabel.text = tracksService.tracks[trackIndex].name
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         print("Cell \(indexPath) deselected")
-        if let selectedCell = collectionView.cellForItem(at: indexPath) as? TrackCell {
-            selectedCell.removePlayAnimation()
-        }
+        handlePlayCellIndicator(index: indexPath.row, needToShow: false)
+
     }
-    
-}
+    }
+
 
 extension TracklistViewController: UICollectionViewDelegateFlowLayout {
     
@@ -127,5 +157,46 @@ extension TracklistViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: 50)
     }
 }
+
+extension TracklistViewController: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        let currentTrackIndex = myPlayer.currentTrackIndex
+
+        handlePlayCellIndicator(index: currentTrackIndex, needToShow: false)
+        myPlayer.nextTrack()
+        
+    }
+}
+
+extension TracklistViewController {
+    private func handlePlayCellIndicator(index: Int, needToShow: Bool) {
+        let indexPath = IndexPath(row: index, section: 0)
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? TrackCell {
+            if needToShow {
+                selectedCell.showPlayAnimation()
+            } else {
+                selectedCell.removePlayAnimation()
+            }
+        }
+    }
+}
+    
+extension TracklistViewController: PlayerSmallViewDelegate {
+    func goToPlayer() {
+        let playerViewController = PlayerViewController(player: myPlayer)
+        self.navigationController?.present(playerViewController, animated: true)
+    }
+    
+    func playPauseButtonDidTapped(with state: PlayPauseButton.ButtonState) {
+        switch state {
+            case .pause:
+            myPlayer.pause()
+            case .play:
+            myPlayer.play()
+        }
+    }
+}
+
+
 
 

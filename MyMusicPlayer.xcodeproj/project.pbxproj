@@ -22,6 +22,8 @@
 		758DA17D2AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1782AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 */; };
 		758DA17F2AC2ECF5006939D3 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA17E2AC2ECF5006939D3 /* TrackCell.swift */; };
 		758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1832AC30336006939D3 /* PlayerSmallView.swift */; };
+		758DA1862AC411C6006939D3 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1852AC411C6006939D3 /* PlayPauseButton.swift */; };
+		758DA1882AC4469B006939D3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1872AC4469B006939D3 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		758DA1782AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "вика кравцова - Твой Юг.mp3"; sourceTree = "<group>"; };
 		758DA17E2AC2ECF5006939D3 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
 		758DA1832AC30336006939D3 /* PlayerSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSmallView.swift; sourceTree = "<group>"; };
+		758DA1852AC411C6006939D3 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
+		758DA1872AC4469B006939D3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */,
+				758DA1872AC4469B006939D3 /* PlayerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			children = (
 				758DA17E2AC2ECF5006939D3 /* TrackCell.swift */,
 				758DA1832AC30336006939D3 /* PlayerSmallView.swift */,
+				758DA1852AC411C6006939D3 /* PlayPauseButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,10 +219,12 @@
 				758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */,
 				758DA1542AC1CAF9006939D3 /* TracklistViewController.swift in Sources */,
 				758DA1722AC20404006939D3 /* TracksService.swift in Sources */,
+				758DA1862AC411C6006939D3 /* PlayPauseButton.swift in Sources */,
 				758DA1402AC1C862006939D3 /* AppDelegate.swift in Sources */,
 				758DA1422AC1C862006939D3 /* SceneDelegate.swift in Sources */,
 				758DA16C2AC1F20B006939D3 /* MyPlayer.swift in Sources */,
 				758DA17F2AC2ECF5006939D3 /* TrackCell.swift in Sources */,
+				758DA1882AC4469B006939D3 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

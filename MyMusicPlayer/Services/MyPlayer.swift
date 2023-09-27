@@ -10,73 +10,73 @@ import UIKit
 import AVFoundation
 import Combine
 
-//var audioPlayer: AVAudioPlayer!
-
 class MyPlayer {
     
     private var cancallables = Set<AnyCancellable>()
     
-    var avAudioPlayer: AVAudioPlayer!
+    var avAudioPlayer = AVAudioPlayer()
     var tracksService: TracksService!
     var customTimer: Stopwatch!
     
-    public var songPosition: Int = 0 // would be an indexPath.row of collectionView
-    public var tracks: [Track] = []
+    // MARK: - Output
     
-    private var cancellables = Set<AnyCancellable>()
+    @Published public var currentTrackIndex: Int = 0 {
+        didSet {
+        }
+    }
+
     @Published var currentTime: TimeInterval = 0
     
-   
+    public var tracks: [Track] {
+        tracksService.tracks
+    }
+    
     init(service: TracksService) {
         
         self.tracksService = service
-        tracks = tracksService.tracks
         self.customTimer = Stopwatch()
-        
+       
         customTimer.$elapsedTime
             .sink { newValue in
                 // НЕПРАВИЛЬНО СЧИТАЕТ (где-то надо делить на duration??)
                 let value = newValue / 100
                 self.currentTime = value
-                print(newValue)
             }
             .store(in: &cancallables)
-        
     }
     
-    
     func configureAudioPlayer(trackIndex: Int? = nil) {
-        
-        var index = songPosition
-        
-        if let trackindex = trackIndex {
-            index = trackindex
+       
+        if let newindex = trackIndex {
+            currentTrackIndex = newindex
         }
-        
-        let currentTrack = tracks[index]
+
+        let currentTrack = tracks[currentTrackIndex]
         let url = URL(filePath: currentTrack.filePath)
         
         do {
             avAudioPlayer = try AVAudioPlayer(contentsOf: url)
+            avAudioPlayer.volume = 0.1
+            let startTimeInSeconds: TimeInterval = 165
+            avAudioPlayer.currentTime = startTimeInSeconds
+           
         }
         catch {
             print(error)
         }
-        
-        avAudioPlayer.prepareToPlay()
-        self.play()
        
-        
-        
+        self.play()
     }
     
     func play() {
+       
         customTimer.isRunning = true
         avAudioPlayer.play()
+       
     }
     
     func pause() {
-        customTimer.reset()
+        //customTimer.reset()
         if avAudioPlayer.isPlaying {
             avAudioPlayer.pause()
         } else {
@@ -91,20 +91,81 @@ class MyPlayer {
         }
     }
     
-    func previous() {
-        if songPosition > 0 {
-            songPosition -= 1
-            avAudioPlayer.pause()
+    func previousTrack() {
+        if currentTrackIndex > 0 {
+            currentTrackIndex -= 1
+            //avAudioPlayer.pause()
+            configureAudioPlayer(trackIndex: currentTrackIndex)
         }
-        
-        func next() {
-            if songPosition < tracks.count - 1 {
-                songPosition += 1
-                avAudioPlayer.pause()
-            }
-        }
-        
     }
+    
+    func nextTrack() {
+        if currentTrackIndex < tracks.count - 1 {
+            currentTrackIndex += 1
+            //avAudioPlayer.pause()
+            configureAudioPlayer(trackIndex: currentTrackIndex)
+        }
+    }
+}
+
+extension MyPlayer: AVAudioPlayerDelegate {
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        print("YES")
+    }
+    
+    func isEqual(_ object: Any?) -> Bool {
+        return true
+    }
+    
+    var hash: Int {
+        5
+    }
+    
+    var superclass: AnyClass? {
+        nil
+    }
+    
+    func `self`() -> Self {
+        self
+    }
+    
+    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+        nil
+    }
+    
+    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+        nil
+    }
+    
+    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+        nil
+    }
+    
+    func isProxy() -> Bool {
+        false
+    }
+    
+    func isKind(of aClass: AnyClass) -> Bool {
+        false
+    }
+    
+    func isMember(of aClass: AnyClass) -> Bool {
+        false
+    }
+    
+    func conforms(to aProtocol: Protocol) -> Bool {
+        false
+    }
+    
+    func responds(to aSelector: Selector!) -> Bool {
+        false
+    }
+    
+    var description: String {
+        "need conformance"
+    }
+    
     
 }
 
