@@ -9,7 +9,8 @@ import Foundation
 
 struct Track {
     let name: String
-    //let imageName: String
+    let artist: String?
+    let imageData: Data? 
     let filePath: String
 }
 

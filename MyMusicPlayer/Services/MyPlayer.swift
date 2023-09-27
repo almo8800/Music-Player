@@ -16,7 +16,7 @@ class MyPlayer {
     
     var avAudioPlayer = AVAudioPlayer()
     var tracksService: TracksService!
-    var customTimer: Stopwatch!
+    var customTimer: CustomTimer!
     
     // MARK: - Output
     
@@ -31,15 +31,19 @@ class MyPlayer {
         tracksService.tracks
     }
     
+    public var currentTrack: Track {
+        tracks[currentTrackIndex]
+    }
+    
     init(service: TracksService) {
         
         self.tracksService = service
-        self.customTimer = Stopwatch()
+        self.customTimer = CustomTimer()
        
         customTimer.$elapsedTime
             .sink { newValue in
-                // НЕПРАВИЛЬНО СЧИТАЕТ (где-то надо делить на duration??)
-                let value = newValue / 100
+                print(newValue)
+                let value = newValue / self.avAudioPlayer.duration
                 self.currentTime = value
             }
             .store(in: &cancallables)
@@ -53,34 +57,42 @@ class MyPlayer {
 
         let currentTrack = tracks[currentTrackIndex]
         let url = URL(filePath: currentTrack.filePath)
-        
+        let musicAsset = AVAsset(url: url)
+    
+        musicAsset.loadMetadata(for: .id3Metadata) { result, error in
+            if let result = result {
+                print(result)
+            }
+            if let error = error {
+                print(error)
+            }
+        }
+       
         do {
             avAudioPlayer = try AVAudioPlayer(contentsOf: url)
             avAudioPlayer.volume = 0.1
             let startTimeInSeconds: TimeInterval = 165
-            avAudioPlayer.currentTime = startTimeInSeconds
-           
+            //avAudioPlayer.currentTime = startTimeInSeconds
         }
         catch {
             print(error)
         }
-       
         self.play()
     }
     
     func play() {
-       
         customTimer.isRunning = true
         avAudioPlayer.play()
-       
     }
     
     func pause() {
-        //customTimer.reset()
+        
         if avAudioPlayer.isPlaying {
             avAudioPlayer.pause()
         } else {
         }
+        
+        customTimer.isRunning = false
     }
     
     func restart() {
@@ -94,7 +106,6 @@ class MyPlayer {
     func previousTrack() {
         if currentTrackIndex > 0 {
             currentTrackIndex -= 1
-            //avAudioPlayer.pause()
             configureAudioPlayer(trackIndex: currentTrackIndex)
         }
     }
@@ -102,7 +113,6 @@ class MyPlayer {
     func nextTrack() {
         if currentTrackIndex < tracks.count - 1 {
             currentTrackIndex += 1
-            //avAudioPlayer.pause()
             configureAudioPlayer(trackIndex: currentTrackIndex)
         }
     }
@@ -165,49 +175,6 @@ extension MyPlayer: AVAudioPlayerDelegate {
     var description: String {
         "need conformance"
     }
-    
-    
 }
 
-class Stopwatch: ObservableObject {
-    private var startTime: Date?
-    private var accumulatedTime:TimeInterval = 0
-    private var timer: Cancellable?
-    
-    @Published var isRunning = false {
-        didSet {
-            if self.isRunning {
-                self.start()
-            } else {
-                self.stop()
-            }
-        }
-    }
-    
-    @Published private(set) var elapsedTime: TimeInterval = 0
-    
-    private func start() -> Void {
-        self.startTime = Date()
-        self.timer?.cancel()
-        self.timer = Timer.publish(every: 1, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                self.elapsedTime = self.getElapsedTime()
-            }
-    }
-    private func stop() -> Void {
-        self.timer?.cancel()
-        self.timer = nil
-        self.accumulatedTime = self.elapsedTime
-        self.startTime = nil
-    }
-    func reset() -> Void {
-        self.accumulatedTime = 0
-        self.elapsedTime = 0
-        self.startTime = nil
-        self.isRunning = false
-    }
-    private func getElapsedTime() -> TimeInterval {
-        return -(self.startTime?.timeIntervalSinceNow ??     0)+self.accumulatedTime
-    }
-}
+

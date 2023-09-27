@@ -10,7 +10,13 @@ import UIKit
 
 class TrackCell: UICollectionViewCell {
     
-   private let trackCoverView = UIImageView()
+    private let trackCoverView: UIImageView = {
+        var image = UIImage(systemName: "airpodsmax")
+        var imageView = UIImageView(image: image)
+        
+        return imageView
+    }()
+    
    private let playAnimationView: UIImageView = {
         let dimension: CGFloat = 20 // Specify the desired size of the circle view
            
@@ -34,23 +40,37 @@ class TrackCell: UICollectionViewCell {
            return playAnimationView
     }()
     
-    private var trackNameLabel = UILabel()
+    private var trackNameLabel: UILabel = {
+       var label = UILabel()
+       label.font = UIFont.boldSystemFont(ofSize: 16)
+       return label
+    }()
+    private var artistNameLabel: UILabel = {
+       var label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
+    
+    //MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-      
         setupUI()
-        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func configure(track: Track) {
         self.trackNameLabel.text = track.name
+        self.artistNameLabel.text = track.artist
     }
     
+    //MARK: - Setup UI
+    
     private func setupUI() {
-        contentView.backgroundColor = .lightGray
-        
-        trackCoverView.backgroundColor = .white
+        contentView.backgroundColor = #colorLiteral(red: 1, green: 0.9424937963, blue: 0.7806524634, alpha: 1)
         contentView.addSubview(trackCoverView)
         
         trackCoverView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,23 +90,25 @@ class TrackCell: UICollectionViewCell {
             playAnimationView.widthAnchor.constraint(equalTo: playAnimationView.heightAnchor)
         ])
        
-        
         contentView.addSubview(trackNameLabel)
         trackNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            trackNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            trackNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6),
             trackNameLabel.leadingAnchor.constraint(equalTo: trackCoverView.trailingAnchor, constant: 5),
-            trackNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5),
-            trackNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            trackNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5)
         ])
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+        contentView.addSubview(artistNameLabel)
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            artistNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 0),
+            artistNameLabel.leadingAnchor.constraint(equalTo: trackCoverView.trailingAnchor, constant: 5),
+            trackNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 5)
+        ])
     }
 }
 
-// UI Events
+//MARK: - UI Events
 
 extension TrackCell {
     func showPlayAnimation() {

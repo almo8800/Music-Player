@@ -21,12 +21,18 @@ protocol PlayerSmallViewDelegate: AnyObject {
 class PlayerSmallView: UIView {
     
     // MARK: - User Interface
+    private var infoLabel: UILabel = {
+       var label = UILabel()
+        label.text = "(свайпай вверх)"
+        label.textColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        return label
+    }()
     
     var progressView: UIProgressView = {
         let progressView = UIProgressView(progressViewStyle: .bar)
         progressView.trackTintColor = .blue
         progressView.progressTintColor = .yellow
-
+        
         return progressView
     }()
     
@@ -37,8 +43,8 @@ class PlayerSmallView: UIView {
     }()
     
     var timeLabel: UILabel = {
-       var label = UILabel()
-       return label
+        var label = UILabel()
+        return label
     }()
     
     var playAndStopButton: PlayPauseButton = {
@@ -55,9 +61,9 @@ class PlayerSmallView: UIView {
     
     var isPlaying = false
     private var topConstant = NSLayoutConstraint()
-    
     private var currentState: State = .normal
-
+    
+    // MARK: - Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,7 +74,7 @@ class PlayerSmallView: UIView {
         configureButton()
         
         setupGuestRecognizer()
-
+        
         self.roundCorners([.topLeft, .topRight, .bottomLeft, .bottomRight], radius: 10)
     }
     
@@ -84,7 +90,7 @@ class PlayerSmallView: UIView {
     private func playAndStopButtonTapped() {
         delegate?.playPauseButtonDidTapped(with: playAndStopButton.buttonState)
     }
-
+    
     override func didMoveToSuperview() {
         if let superview = superview {
             NSLayoutConstraint.activate([
@@ -101,18 +107,19 @@ class PlayerSmallView: UIView {
         super.layoutSubviews()
     }
     
+    // MARK: - Setup User Interface
+    
     func setupUI() {
         // Progress View Setup
         addSubview(progressView)
         progressView.setProgress(0, animated: true)
         progressView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                progressView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-                progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-                progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-              
-                progressView.heightAnchor.constraint(equalToConstant: 2)
-            ])
+        NSLayoutConstraint.activate([
+            progressView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            progressView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            progressView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            progressView.heightAnchor.constraint(equalToConstant: 2)
+        ])
         
         // TrackNameLabel Setup
         addSubview(nameLabel)
@@ -122,17 +129,25 @@ class PlayerSmallView: UIView {
             nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10)
         ])
         
+        // Info Label (TEMP)
+        addSubview(infoLabel)
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            infoLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            infoLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 10)
+        ])
+        
         // PlayPause Button
         addSubview(playAndStopButton)
         playAndStopButton.translatesAutoresizingMaskIntoConstraints = false
-             NSLayoutConstraint.activate([
-                playAndStopButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-                playAndStopButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-                playAndStopButton.widthAnchor.constraint(equalToConstant: 30),
-                playAndStopButton.heightAnchor.constraint(equalTo: playAndStopButton.widthAnchor)
-             ])
-        }
+        NSLayoutConstraint.activate([
+            playAndStopButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            playAndStopButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            playAndStopButton.widthAnchor.constraint(equalToConstant: 30),
+            playAndStopButton.heightAnchor.constraint(equalTo: playAndStopButton.widthAnchor)
+        ])
     }
+}
 
 
 
@@ -148,14 +163,13 @@ extension PlayerSmallView {
     @objc func startTransition(_ tap: UITapGestureRecognizer) {
         if let superview = superview {
             self.topAnchor.constraint(equalTo: superview.bottomAnchor, constant: -200).isActive = true
-            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut) {
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0, options: .curveEaseOut, animations: {
                 self.superview?.layoutIfNeeded()
-            }
+            })
         }
         delegate?.goToPlayer()
     }
     
-  
     
     func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         if #available(iOS 11, *) {

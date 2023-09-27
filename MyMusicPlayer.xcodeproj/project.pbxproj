@@ -24,6 +24,7 @@
 		758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1832AC30336006939D3 /* PlayerSmallView.swift */; };
 		758DA1862AC411C6006939D3 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1852AC411C6006939D3 /* PlayPauseButton.swift */; };
 		758DA1882AC4469B006939D3 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1872AC4469B006939D3 /* PlayerViewController.swift */; };
+		758DA18A2AC4DBD1006939D3 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1892AC4DBD1006939D3 /* CustomTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		758DA1832AC30336006939D3 /* PlayerSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSmallView.swift; sourceTree = "<group>"; };
 		758DA1852AC411C6006939D3 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		758DA1872AC4469B006939D3 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		758DA1892AC4DBD1006939D3 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				758DA16B2AC1F20B006939D3 /* MyPlayer.swift */,
 				758DA1712AC20404006939D3 /* TracksService.swift */,
+				758DA1892AC4DBD1006939D3 /* CustomTimer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				758DA16F2AC1F9AF006939D3 /* Song.swift in Sources */,
+				758DA18A2AC4DBD1006939D3 /* CustomTimer.swift in Sources */,
 				758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */,
 				758DA1542AC1CAF9006939D3 /* TracklistViewController.swift in Sources */,
 				758DA1722AC20404006939D3 /* TracksService.swift in Sources */,

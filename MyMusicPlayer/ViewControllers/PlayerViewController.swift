@@ -7,9 +7,16 @@
 
 import Foundation
 import UIKit
+import Combine
 
 class PlayerViewController: UIViewController {
+    
+    //MARK: - Properties
+    
+    private var cancallables = Set<AnyCancellable>()
     var musicPlayer: MyPlayer!
+    
+    //MARK: - User Interface
     
     private var coverImageView: UIImageView = {
         let imageView = UIImageView()
@@ -20,6 +27,12 @@ class PlayerViewController: UIViewController {
     }()
     
     private var trackNameLabel: UILabel = {
+        var label = UILabel()
+        label.text = "default"
+        return label
+    }()
+    
+    private var artistNameLabel: UILabel = {
         var label = UILabel()
         label.text = "default"
         return label
@@ -61,21 +74,63 @@ class PlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 1, green: 0.9424937963, blue: 0.7806524634, alpha: 1)
+        playPauseButton.addTarget(self, action: #selector(playOrPauseTapped), for: .touchUpInside)
         
+        if musicPlayer.avAudioPlayer.isPlaying {
+            playPauseButton.buttonState = .play
+        } else { playPauseButton.buttonState = .pause}
+ 
         previousbutton.addTarget(self, action: #selector(previousButtonTapped), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         
         setupUI()
+        bindingFromPlayer()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        informationConfigure()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+    }
+    
+    private func informationConfigure() {
+        let track = musicPlayer.currentTrack
+        trackNameLabel.text = track.name
+        artistNameLabel.text = track.artist
+        coverImageView.image = track.imageData.map { UIImage(data: $0) ?? UIImage() }
+    }
+    
+  
+    // MARK: - Binding from Player
+    private func bindingFromPlayer() {
+        musicPlayer.$currentTime
+        .map { value in return Float(value) }
+            .sink { newValue in
+                self.progressView.setProgress(newValue, animated: false)
+            }
+            .store(in: &cancallables)
     }
     
     // MARK: - Player Controlling
     
+    @objc func playOrPauseTapped() {
+        switch playPauseButton.buttonState {
+        case .pause:
+            musicPlayer.pause()
+        case .play:
+            musicPlayer.play()
+        }
+    }
     @objc func play() {
         musicPlayer.play()
-       
     }
     
     @objc func pause() {
@@ -84,11 +139,13 @@ class PlayerViewController: UIViewController {
     
     @objc func previousButtonTapped() {
         musicPlayer.previousTrack()
+        informationConfigure()
         print("PREVIOUS BUTTON TAPPED")
     }
     
     @objc func nextButtonTapped() {
         musicPlayer.nextTrack()
+        informationConfigure()
         print("NEXT BUTTON TAPPED")
     }
     
@@ -114,10 +171,17 @@ class PlayerViewController: UIViewController {
             trackNameLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor)
         ])
         
+        view.addSubview(artistNameLabel)
+        artistNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            artistNameLabel.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 3),
+            artistNameLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor)
+        ])
+        
         view.addSubview(progressView)
         progressView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: trackNameLabel.bottomAnchor, constant: 20),
+            progressView.topAnchor.constraint(equalTo: artistNameLabel.bottomAnchor, constant: 20),
             progressView.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: coverImageView.trailingAnchor)
         ])

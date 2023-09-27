@@ -14,7 +14,16 @@ class TracklistViewController: UIViewController {
     
     private var cancallables = Set<AnyCancellable>()
     
-    var collectionView: UICollectionView!
+    //MARK: - User Interface
+    private var collectionView: UICollectionView!
+    lazy var playerSmallView: PlayerSmallView = {
+        let playerView = PlayerSmallView()
+        view.addSubview(playerView)
+        return playerView
+    }()
+    
+    //MARK: - Properties
+    
     var tracksService = TracksService()
     var myPlayer: MyPlayer!
     
@@ -26,34 +35,38 @@ class TracklistViewController: UIViewController {
         }
     }
     
-    var isFirstTap = false
+    private var isFirstTap = false
     
-    lazy var playerSmallView: PlayerSmallView = {
-        let playerView = PlayerSmallView()
-        view.addSubview(playerView)
-        return playerView
-    }()
-    
+    //MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .cyan
         
-      
-        
         configureUI()
-    
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(TrackCell.self, forCellWithReuseIdentifier: "TracklistCell")
         
-        tracksService.configureSongs { tracks in
-            self.collectionView.reloadData()
-        }
-        
         myPlayer = MyPlayer(service: tracksService)
-        
         playerSmallView.delegate = self
+        bindingFromPlayer()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
+    //MARK: - Binding from Player
+    
+    private func bindingFromPlayer() {
         myPlayer.$currentTime
         .map { value in return Float(value) }
             .sink { newValue in
@@ -70,9 +83,18 @@ class TracklistViewController: UIViewController {
                 self.handlePlayCellIndicator(index: trackIndex, needToShow: true)
             }
             .store(in: &cancallables)
+        
+        tracksService.configureSongs { result in
+            switch result {
+            case .success:
+                self.collectionView.reloadData()
+            case .failure:
+                print("Problem configure songs ")
+            }
+        }
     }
     
-    func activatePlayerSmallView() {
+    private func activatePlayerSmallView() {
         playerSmallView.topAnchor.constraint(equalTo: view.bottomAnchor, constant: -120).isActive = true
         playerSmallView.isPlaying.toggle()
         
@@ -80,8 +102,8 @@ class TracklistViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-    
-    func configureUI() {
+
+    private func configureUI() {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -98,6 +120,8 @@ class TracklistViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 }
+
+// MARK: - UICollectionViewDelegatem, UICollectionViewDataSource
 
 extension TracklistViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -116,18 +140,11 @@ extension TracklistViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Cell Did Tapped for \(indexPath)")
-       
-      
         myPlayer.configureAudioPlayer(trackIndex: indexPath.row)
         myPlayer.avAudioPlayer.delegate = self
-        
         playerSmallView.playAndStopButton.buttonState = .play
-        
         playerSmallViewConfigure(trackIndex: indexPath.row)
-        
         handlePlayCellIndicator(index: indexPath.row, needToShow: true)
-        
         
         guard isFirstTap else {
             isFirstTap = true
@@ -142,15 +159,13 @@ extension TracklistViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        print("Cell \(indexPath) deselected")
         handlePlayCellIndicator(index: indexPath.row, needToShow: false)
-
     }
-    }
+}
 
+//MARK: - UICollectionViewDelegateFlowLayout
 
 extension TracklistViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -161,10 +176,8 @@ extension TracklistViewController: UICollectionViewDelegateFlowLayout {
 extension TracklistViewController: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         let currentTrackIndex = myPlayer.currentTrackIndex
-
         handlePlayCellIndicator(index: currentTrackIndex, needToShow: false)
         myPlayer.nextTrack()
-        
     }
 }
 
@@ -180,7 +193,7 @@ extension TracklistViewController {
         }
     }
 }
-    
+
 extension TracklistViewController: PlayerSmallViewDelegate {
     func goToPlayer() {
         let playerViewController = PlayerViewController(player: myPlayer)
