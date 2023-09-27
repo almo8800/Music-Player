@@ -9,31 +9,39 @@
 /* Begin PBXBuildFile section */
 		758DA1402AC1C862006939D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA13F2AC1C862006939D3 /* AppDelegate.swift */; };
 		758DA1422AC1C862006939D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1412AC1C862006939D3 /* SceneDelegate.swift */; };
-		758DA1442AC1C862006939D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1432AC1C862006939D3 /* ViewController.swift */; };
 		758DA1492AC1C863006939D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1482AC1C863006939D3 /* Assets.xcassets */; };
 		758DA14C2AC1C863006939D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 758DA14A2AC1C863006939D3 /* LaunchScreen.storyboard */; };
 		758DA1542AC1CAF9006939D3 /* TracklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */; };
-		758DA1662AC1EF07006939D3 /* Blasta - Из бара.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */; };
-		758DA1672AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */; };
-		758DA1682AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */; };
-		758DA1692AC1EF07006939D3 /* Sampha - Only.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */; };
-		758DA16A2AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */; };
+		758DA16C2AC1F20B006939D3 /* MyPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA16B2AC1F20B006939D3 /* MyPlayer.swift */; };
+		758DA16F2AC1F9AF006939D3 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA16E2AC1F9AF006939D3 /* Song.swift */; };
+		758DA1722AC20404006939D3 /* TracksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1712AC20404006939D3 /* TracksService.swift */; };
+		758DA1792AC20B2E006939D3 /* Blasta - Из бара.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1742AC20B2E006939D3 /* Blasta - Из бара.mp3 */; };
+		758DA17A2AC20B2E006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1752AC20B2E006939D3 /* Komplimenter - В твоей голове.mp3 */; };
+		758DA17B2AC20B2E006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1762AC20B2E006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */; };
+		758DA17C2AC20B2E006939D3 /* Sampha - Only.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1772AC20B2E006939D3 /* Sampha - Only.mp3 */; };
+		758DA17D2AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 758DA1782AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 */; };
+		758DA17F2AC2ECF5006939D3 /* TrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA17E2AC2ECF5006939D3 /* TrackCell.swift */; };
+		758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758DA1832AC30336006939D3 /* PlayerSmallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		758DA13C2AC1C862006939D3 /* MyMusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyMusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		758DA13F2AC1C862006939D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		758DA1412AC1C862006939D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		758DA1432AC1C862006939D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		758DA1482AC1C863006939D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		758DA14B2AC1C863006939D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		758DA14D2AC1C863006939D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracklistViewController.swift; sourceTree = "<group>"; };
-		758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blasta - Из бара.mp3"; sourceTree = "<group>"; };
-		758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Komplimenter - В твоей голове.mp3"; sourceTree = "<group>"; };
-		758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Seathasky, Collette Warren - Cant Right Now.mp3"; sourceTree = "<group>"; };
-		758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sampha - Only.mp3"; sourceTree = "<group>"; };
-		758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "вика кравцова - Твой Юг.mp3"; sourceTree = "<group>"; };
+		758DA16B2AC1F20B006939D3 /* MyPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlayer.swift; sourceTree = "<group>"; };
+		758DA16E2AC1F9AF006939D3 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		758DA1712AC20404006939D3 /* TracksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksService.swift; sourceTree = "<group>"; };
+		758DA1742AC20B2E006939D3 /* Blasta - Из бара.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Blasta - Из бара.mp3"; sourceTree = "<group>"; };
+		758DA1752AC20B2E006939D3 /* Komplimenter - В твоей голове.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Komplimenter - В твоей голове.mp3"; sourceTree = "<group>"; };
+		758DA1762AC20B2E006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Seathasky, Collette Warren - Cant Right Now.mp3"; sourceTree = "<group>"; };
+		758DA1772AC20B2E006939D3 /* Sampha - Only.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Sampha - Only.mp3"; sourceTree = "<group>"; };
+		758DA1782AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "вика кравцова - Твой Юг.mp3"; sourceTree = "<group>"; };
+		758DA17E2AC2ECF5006939D3 /* TrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCell.swift; sourceTree = "<group>"; };
+		758DA1832AC30336006939D3 /* PlayerSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSmallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,28 +74,64 @@
 		758DA13E2AC1C862006939D3 /* MyMusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				758DA1602AC1EF07006939D3 /* library */,
-				758DA13F2AC1C862006939D3 /* AppDelegate.swift */,
-				758DA1412AC1C862006939D3 /* SceneDelegate.swift */,
-				758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */,
-				758DA1432AC1C862006939D3 /* ViewController.swift */,
+				758DA1802AC2F9DF006939D3 /* App */,
+				758DA1702AC20394006939D3 /* Services */,
+				758DA16D2AC1F9A1006939D3 /* Models */,
+				758DA1812AC2FA01006939D3 /* ViewControllers */,
+				758DA1822AC2FA22006939D3 /* Views */,
 				758DA1482AC1C863006939D3 /* Assets.xcassets */,
 				758DA14A2AC1C863006939D3 /* LaunchScreen.storyboard */,
 				758DA14D2AC1C863006939D3 /* Info.plist */,
+				758DA1742AC20B2E006939D3 /* Blasta - Из бара.mp3 */,
+				758DA1752AC20B2E006939D3 /* Komplimenter - В твоей голове.mp3 */,
+				758DA1762AC20B2E006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */,
+				758DA1772AC20B2E006939D3 /* Sampha - Only.mp3 */,
+				758DA1782AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 */,
 			);
 			path = MyMusicPlayer;
 			sourceTree = "<group>";
 		};
-		758DA1602AC1EF07006939D3 /* library */ = {
+		758DA16D2AC1F9A1006939D3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				758DA1612AC1EF07006939D3 /* Blasta - Из бара.mp3 */,
-				758DA1622AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 */,
-				758DA1632AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 */,
-				758DA1642AC1EF07006939D3 /* Sampha - Only.mp3 */,
-				758DA1652AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 */,
+				758DA16E2AC1F9AF006939D3 /* Song.swift */,
 			);
-			path = library;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		758DA1702AC20394006939D3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				758DA16B2AC1F20B006939D3 /* MyPlayer.swift */,
+				758DA1712AC20404006939D3 /* TracksService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		758DA1802AC2F9DF006939D3 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				758DA13F2AC1C862006939D3 /* AppDelegate.swift */,
+				758DA1412AC1C862006939D3 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		758DA1812AC2FA01006939D3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				758DA1532AC1CAF9006939D3 /* TracklistViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		758DA1822AC2FA22006939D3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				758DA17E2AC2ECF5006939D3 /* TrackCell.swift */,
+				758DA1832AC30336006939D3 /* PlayerSmallView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,12 +192,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				758DA1672AC1EF07006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */,
-				758DA1662AC1EF07006939D3 /* Blasta - Из бара.mp3 in Resources */,
-				758DA1692AC1EF07006939D3 /* Sampha - Only.mp3 in Resources */,
-				758DA1682AC1EF07006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */,
+				758DA17A2AC20B2E006939D3 /* Komplimenter - В твоей голове.mp3 in Resources */,
+				758DA1792AC20B2E006939D3 /* Blasta - Из бара.mp3 in Resources */,
+				758DA17C2AC20B2E006939D3 /* Sampha - Only.mp3 in Resources */,
+				758DA17B2AC20B2E006939D3 /* Seathasky, Collette Warren - Cant Right Now.mp3 in Resources */,
 				758DA14C2AC1C863006939D3 /* LaunchScreen.storyboard in Resources */,
-				758DA16A2AC1EF07006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */,
+				758DA17D2AC20B2E006939D3 /* вика кравцова - Твой Юг.mp3 in Resources */,
 				758DA1492AC1C863006939D3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,10 +209,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758DA16F2AC1F9AF006939D3 /* Song.swift in Sources */,
+				758DA1842AC30336006939D3 /* PlayerSmallView.swift in Sources */,
 				758DA1542AC1CAF9006939D3 /* TracklistViewController.swift in Sources */,
-				758DA1442AC1C862006939D3 /* ViewController.swift in Sources */,
+				758DA1722AC20404006939D3 /* TracksService.swift in Sources */,
 				758DA1402AC1C862006939D3 /* AppDelegate.swift in Sources */,
 				758DA1422AC1C862006939D3 /* SceneDelegate.swift in Sources */,
+				758DA16C2AC1F20B006939D3 /* MyPlayer.swift in Sources */,
+				758DA17F2AC2ECF5006939D3 /* TrackCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
