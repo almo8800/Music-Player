@@ -1,4 +1,4 @@
-# SurfPlayer :eyes:
+# MusicPlayer :eyes:
 Проигрыватель аудиотреков из проекта.
 
 **Технологии** :wrench: 
