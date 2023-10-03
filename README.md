@@ -11,7 +11,6 @@
 - Добавить отображения длительности треков и текущую секунду проигрывания
 - Горизонтальная вёрстка не предусмотрена
  
-Спасибо за внимание! 
-
 <img src="https://user-images.githubusercontent.com/120101941/272228777-e4e2d946-dd4e-467c-ba76-26b442d5fe8a.png" width="250" height="500" />
 <img src="https://user-images.githubusercontent.com/120101941/272228952-f59bbe74-7777-453e-87e7-e600b8ff3368.png" width="250" height="500" />
+Спасибо за внимание! 
